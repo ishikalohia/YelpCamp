@@ -1,0 +1,74 @@
+<% include ../partials/hearder %>
+<div class = "container">
+	<div class = "row">
+		<div class = "col-md-3">
+			<p class = "lead">
+				YelpCamp
+			</p>
+			<div class = "list-group">
+				<div class = "list-group-item active">Item 1</div>
+				<div class = "list-group-item">Item 2</div>
+				<div class = "list-group-item">Item 3</div>
+			</div>
+		</div>
+		<div class = "col-md-9">
+			<div class = "card">
+				<img class = "img-responsive" src = "<%= campground.image %>">
+				<div class = "caption">
+					<h4 class = "float-right">
+						$<%= campground.price %>/night
+					</h4>
+					<h3>
+						<a href = "#"><%= campground.name %></a>
+					</h3>
+					<p>
+						<%= campground.description %>
+					</p>
+					<p>
+						<em>Submitted by: <a href = "/users/<%= campground.author.id %>"><%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></a></em>
+					</p>
+					<% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+					<a class = "btn btn-warning btn-sm" href = "/campground/<%= campground._id %>/edit">
+						Edit
+					</a>
+					<form class = "deleteform" action = "/campground/<%= campground._id %>?_method=DELETE" method = "POST">
+						<button class = "btn btn-danger btn-sm">
+							Delete
+						</button>
+					</form>
+					<% } %>
+				</div>
+			</div>
+			<br>
+			<div class = "card bg-light">
+				<div class = "card-header">
+					<div class = "text-right">
+						<a class = "btn btn-success" href = "/campground/<%= campground._id %>/comments/new">Add New Comment</a>
+					</div>
+				</div>
+				<% campground.comments.forEach(function(comment){ %>
+					<div class = "row">
+						<div class = "col-lg-12">
+							<strong><%= comment.author.username %></strong>
+							<span class="float-right"><%= moment(comment.createdAt).fromNow() %></span>
+							<p>
+								<%= comment.text %>	
+							</p>
+							<% if(currentUser && comment.author.id.equals(currentUser._id) || 
+								  currentUser && currentUser.isAdmin){ %>
+								<form action = "/campground/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" 
+									  method = "POST" class = "deleteform">
+									<input type = "submit" class = "btn btn-sm btn-danger float-right" value = "Delete">
+								</form>
+								<a class = "btn btn-sm btn-warning float-right"
+								   href = "/campground/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
+							<% } %>
+						</div>	
+					</div>	
+				<% }) %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>

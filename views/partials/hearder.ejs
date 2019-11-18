@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Make site responsive on mobile/tablet -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>YelpCamp</title>
+		<link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel = "stylesheet" href = "/stylesheets/main.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">YelpCamp</a>
+				</div>
+					<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarText" aria-expanded="false" aria-controls="navbarText" aria-label="Toggle navigation">
+					  <span class="navbar-toggler-icon"></span>
+					</button>
+				<div id="navbarText" class="collapse navbar-collapse">
+				  <ul class="nav navbar-nav">
+					<li class="<%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %> nav-item"><a href="/campground" class = "nav-link">Home</a></li>
+				  </ul>
+				  <ul class="navbar-nav ml-auto">
+					  <% if(!currentUser){ %>
+						  <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %> nav-item"><a href="/login" class = "nav-link">Login<i class="fa fa-user"></i></a></li>
+						  <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %> nav-item"><a href="/register" class = "nav-link">Sign Up<i class="fa fa-user-plus"></i></a></li>
+					  <% } else { %>
+						  <li class = "nav-item"><a class = "nav-link" href="#">Signed In As <%= currentUser.username %></a></li>
+						  <li class = "nav-item"><a class = "nav-link" href="/logout">Logout</a></li>
+					  <% } %>
+				  </ul>
+				</div>
+			</div>
+		</nav>
+		<% if(error && error.length > 0){ %>
+			<div class = "container">
+				<div class="alert alert-danger" role="alert"><%= error %></div>
+			</div>
+		<% } %>
+		<% if(success && success.length > 0){ %>
+			<div class = "container">
+				<div class="alert alert-success" role="alert"><%= success %></div>
+			</div>
+		<% } %>
+		

@@ -1,0 +1,15 @@
+.caption {
+	padding: 9px;
+}
+
+.card{
+	padding: 0;
+}
+
+.navbar{
+	margin-bottom: 10px;
+}
+
+.deleteform{
+	display: inline;
+}

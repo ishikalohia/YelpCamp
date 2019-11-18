@@ -1,0 +1,44 @@
+<% include ../partials/hearder %>
+<div class = "container">
+	<header class = "jumbotron">
+		<div class = "container">
+			<h1>
+				Welcome to campground page!!	
+			</h1>
+			<p>
+				View all our hand-picked beautiful campgrounds.
+			</p>
+			<p>
+				<a class = "btn btn-primary btn-lg" href = "/campground/new">Add new campground</a>
+			</p>	
+		</div>
+	</header>
+	<div class = "row-lg-12">
+		<h3>
+			All the Best campgrounds.
+		</h3>
+	</div>
+	<div class = "row" style = "display:flex; flex-wrap: wrap">
+		<% campground.forEach(function(ground){ %>
+			<div class = "col-lg-4 col-md-6">
+				
+				<div class = "card text-center">
+					<img class = "card-img-top" src = "<%= ground.image %>" style = "width: 350px; height: 200px">
+					<div class = "card-body">
+						<h4>
+							<%= ground.name %> 	
+						</h4>
+						<p>
+							<a href = "/campground/<%= ground._id %>" class = "btn btn-primary">More Info</a>
+						</p>
+					</div>
+				</div>		
+			</div>
+		<% }) %>
+	</div>	
+		
+	</div>
+	
+	
+
+<% include ../partials/footer %>
