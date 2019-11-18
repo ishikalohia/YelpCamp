@@ -4,8 +4,17 @@
 	<div class = "row">
 		<div class = "card">
 			<div class = "col-8">
-				<h1><%= user.firstName + " " + user.lastName %></h1>
-				<img src = "<%= user.avatar %>" alt = "user profile image"> 
+				<% if(user.firstName && user.lastName){ %>
+					<h1><%= user.firstName + " " + user.lastName %></h1>
+				<% }else{ %>
+					<h1><%= user.username %></h1>
+				<% } %>
+				<% if(user.avatar){ %>
+					<img src = "<%= user.avatar %>" alt = "user profile image"> 
+				<% }else{ %>
+					<img src = "https://tse3.mm.bing.net/th?id=OIP.q4alwYjAuniYpii0VU46dAHaHa&pid=Api&P=0&w=300&h=300" 
+						 alt = "user profile image">
+				<% } %>
 				<div class = "card footer">
 					<a href = "mailto:<%= user.email %>"><%= user.email %></a>
 				</div>
