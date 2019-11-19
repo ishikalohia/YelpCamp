@@ -20,7 +20,8 @@ mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
 mongoose.set("useCreateIndex", true);
 //console.log(process.env.DATABASEURL);
-mongoose.connect(process.env.DATABASEURL);
+//mongoose.connect("mongodb://localhost/yelp_camp_v1");
+mongoose.connect(process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v1");
 //mongoose.connect("mongodb+srv://ishika:ishika8457@cluster0-7gyqr.mongodb.net/test?retryWrites=true&w=majority").then(()=>{ console.log("Connected to DB")}).catch(err => {console.log("ERROR:", err.message)}
 //);
 app.use(bodyparser.urlencoded({extended: true}));
